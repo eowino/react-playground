@@ -1,5 +1,4 @@
 module.exports = {
-  title: 'React hooks playground',
-  flow: true,
+  title: 'React playground',
   port: 9000,
 };

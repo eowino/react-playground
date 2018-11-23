@@ -13,6 +13,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "flow": "flow",
+    "flow:install": "flow-typed install",
     "docz:dev": "docz dev",
     "docz:build": "docz build"
   },
@@ -29,6 +30,7 @@
     "docz": "^0.12.12",
     "emotion": "^9.2.12",
     "flow-bin": "^0.86.0",
+    "flow-typed": "^2.5.1",
     "react-emotion": "^9.2.12"
   }
 }
