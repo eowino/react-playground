@@ -61,7 +61,8 @@ export default class extends React.Component {
     };
   }
 
-  handleSubmit = values => {
+  handleSubmit = (evt, values) => {
+    evt.preventDefault();
     alert(JSON.stringify(values, null, 2));
   };
 
@@ -69,7 +70,7 @@ export default class extends React.Component {
     return (
       <Form initialValues={this.initialValues}>
         {({ values, handleChange }) => (
-          <form>
+          <form onSubmit={e => this.handleSubmit(e, values)}>
             <FormGroup
               id="name"
               label="name"
@@ -88,9 +89,7 @@ export default class extends React.Component {
               value={values.age}
               onChange={handleChange}
             />
-            <Button type="submit" onClick={() => this.handleSubmit(values)}>
-              Save
-            </Button>
+            <Button type="submit">Save</Button>
           </form>
         )}
       </Form>
