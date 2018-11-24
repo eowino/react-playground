@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'react-emotion';
+import { css } from 'emotion';
 import Input from './Input';
 import Button from './Button';
+
+const Checkbox = css({
+  flexDirection: 'row',
+  flexFlow: 'row-reverse',
+  justifyContent: 'flex-end',
+  alignItems: 'baseline',
+});
 
 const StyledFormGroup = styled('div')({
   display: 'flex',
@@ -22,7 +30,9 @@ export class Form extends React.Component {
   };
 
   handleChange = evt => {
-    const { name, value } = evt.target;
+    const target = evt.target;
+    const name = target.name;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState(prevState => ({
       values: {
         ...prevState.values,
@@ -31,23 +41,42 @@ export class Form extends React.Component {
     }));
   };
 
+  setDirty = evt => {
+    const { name } = evt.target;
+    this.setState(prevState => ({
+      touched: {
+        ...prevState.touched,
+        [name]: true,
+      },
+    }));
+  };
+
+  handleSubmit = evt => {
+    evt.preventDefault();
+    this.props.onSubmit(this.state.values);
+  };
+
   render() {
     return this.props.children({
       ...this.state,
       handleChange: this.handleChange,
+      setDirty: this.setDirty,
+      handleSubmit: this.handleSubmit,
     });
   }
 }
 
 const FormGroup = props => (
-  <StyledFormGroup>
+  <StyledFormGroup className={props.type === 'checkbox' && Checkbox}>
     <StyledLabel htmlFor={props.id}>{props.label}</StyledLabel>
     <Input
-      type="text"
+      type={props.type || 'text'}
       id={props.id}
       name={props.id}
       value={props.value}
       onChange={props.onChange}
+      onBlur={props.onBlur}
+      onFocus={props.onFocus}
     />
   </StyledFormGroup>
 );
@@ -58,40 +87,57 @@ export default class extends React.Component {
       name: '',
       surname: '',
       age: '',
+      terms: '',
     };
   }
 
-  handleSubmit = (evt, values) => {
-    evt.preventDefault();
+  handleSubmit = values => {
     alert(JSON.stringify(values, null, 2));
   };
 
   render() {
     return (
-      <Form initialValues={this.initialValues}>
-        {({ values, handleChange }) => (
-          <form onSubmit={e => this.handleSubmit(e, values)}>
-            <FormGroup
-              id="name"
-              label="name"
-              value={values.name}
-              onChange={handleChange}
-            />
-            <FormGroup
-              id="surname"
-              label="surname"
-              value={values.surname}
-              onChange={handleChange}
-            />
-            <FormGroup
-              id="age"
-              label="age"
-              value={values.age}
-              onChange={handleChange}
-            />
-            <Button type="submit">Save</Button>
-          </form>
-        )}
+      <Form initialValues={this.initialValues} onSubmit={this.handleSubmit}>
+        {props => {
+          const { values, handleChange, setDirty, handleSubmit } = props;
+          return (
+            <React.Fragment>
+              <form onSubmit={handleSubmit}>
+                <FormGroup
+                  id="name"
+                  label="name"
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={setDirty}
+                />
+                <FormGroup
+                  id="surname"
+                  label="surname"
+                  value={values.surname}
+                  onChange={handleChange}
+                  onBlur={setDirty}
+                />
+                <FormGroup
+                  id="age"
+                  label="age"
+                  value={values.age}
+                  onChange={handleChange}
+                  onBlur={setDirty}
+                />
+                <FormGroup
+                  id="terms"
+                  label="accept terms and conditions"
+                  type="checkbox"
+                  value={values.terms}
+                  onChange={handleChange}
+                  onBlur={setDirty}
+                />
+                <Button type="submit">Save</Button>
+              </form>
+              <pre>{JSON.stringify(props, null, 2)}</pre>
+            </React.Fragment>
+          );
+        }}
       </Form>
     );
   }

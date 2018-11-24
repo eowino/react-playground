@@ -21,6 +21,9 @@ const StyledButton = styled('button')({
     outline: 'none',
     cursor: 'pointer',
   },
+  '&:disabled': {
+    opacity: 0.6,
+  },
 });
 
 function Button({ children, ...rest }) {

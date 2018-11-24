@@ -39,7 +39,10 @@ export default class extends React.Component<IFilteredInput> {
   render() {
     return (
       <StyledResults>
-        <Input onChange={this.handleChange} />
+        <Input
+          onChange={this.handleChange}
+          placeholder="Start typing to filter countries"
+        />
         <StyledList>{this.getFilteredresults()}</StyledList>
       </StyledResults>
     );
