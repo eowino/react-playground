@@ -32,6 +32,7 @@ export class Form extends React.Component {
     errors: {},
     touched: {},
     values: this.props.initialValues || {},
+    canSubmit: false,
   };
 
   handleChange = evt => {
@@ -41,19 +42,41 @@ export class Form extends React.Component {
     this.setState(prevState => ({
       values: {
         ...prevState.values,
-        [name]: value,
+        [name]: {
+          ...prevState.values[name],
+          value,
+        },
       },
+      canSubmit: this.canSubmit(),
     }));
   };
 
   setDirty = evt => {
-    const { name } = evt.target;
+    const target = evt.target;
+    const name = target.name;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState(prevState => ({
       touched: {
         ...prevState.touched,
         [name]: true,
       },
+      errors: {
+        ...prevState.errors,
+        [name]: prevState.values.name.validator(value),
+      },
     }));
+  };
+
+  canSubmit = () => {
+    // @TODO: Fix this logic - does not work
+    const { errors } = this.state;
+    let valid = true;
+    for (var prop in errors) {
+      if (errors.hasOwnProperty(prop) && errors[prop]) {
+        valid = false;
+      }
+    }
+    return valid;
   };
 
   handleSubmit = evt => {
@@ -90,6 +113,10 @@ function ErrorMessage({ errors, target, children }) {
   return errors[target] ? children() : null;
 }
 
+function isRequired(value: string) {
+  return value.length < 1;
+}
+
 export default class MyForm extends React.Component {
   get initialValues() {
     return {
@@ -100,19 +127,41 @@ export default class MyForm extends React.Component {
     };
   }
 
+  get initialValuesTwo() {
+    return {
+      name: {
+        value: '',
+        validator: isRequired,
+      },
+      surname: {
+        value: '',
+        validator: isRequired,
+      },
+      age: {
+        value: '',
+        validator: isRequired,
+      },
+      terms: {
+        value: '',
+        validator: isRequired,
+      },
+    };
+  }
+
   handleSubmit = values => {
     alert(JSON.stringify(values, null, 2));
   };
 
   render() {
     return (
-      <Form initialValues={this.initialValues} onSubmit={this.handleSubmit}>
+      <Form initialValues={this.initialValuesTwo} onSubmit={this.handleSubmit}>
         {props => {
           const {
             values,
             handleChange,
             setDirty,
             handleSubmit,
+            canSubmit,
             errors,
           } = props;
           return (
@@ -121,7 +170,7 @@ export default class MyForm extends React.Component {
                 <FormGroup
                   id="name"
                   label="name"
-                  value={values.name}
+                  value={values.name.value}
                   onChange={handleChange}
                   onBlur={setDirty}
                 />
@@ -135,7 +184,7 @@ export default class MyForm extends React.Component {
                 <FormGroup
                   id="surname"
                   label="surname"
-                  value={values.surname}
+                  value={values.surname.value}
                   onChange={handleChange}
                   onBlur={setDirty}
                 />
@@ -149,7 +198,7 @@ export default class MyForm extends React.Component {
                 <FormGroup
                   id="age"
                   label="age"
-                  value={values.age}
+                  value={values.age.value}
                   onChange={handleChange}
                   onBlur={setDirty}
                 />
@@ -164,7 +213,7 @@ export default class MyForm extends React.Component {
                   id="terms"
                   label="accept terms and conditions"
                   type="checkbox"
-                  value={values.terms}
+                  value={values.terms.value}
                   onChange={handleChange}
                   onBlur={setDirty}
                 />
@@ -175,7 +224,9 @@ export default class MyForm extends React.Component {
                     </StyledErrorMessage>
                   )}
                 </ErrorMessage>
-                <Button type="submit">Save</Button>
+                <Button type="submit" disabled={!canSubmit}>
+                  Save
+                </Button>
               </form>
               <pre>{JSON.stringify(props, null, 2)}</pre>
             </React.Fragment>
