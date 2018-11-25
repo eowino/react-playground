@@ -11,6 +11,11 @@ const Checkbox = css({
   alignItems: 'baseline',
 });
 
+const StyledErrorMessage = styled('p')({
+  color: 'red',
+  fontSize: '0.8em',
+});
+
 const StyledFormGroup = styled('div')({
   display: 'flex',
   flexDirection: 'column',
@@ -81,7 +86,11 @@ const FormGroup = props => (
   </StyledFormGroup>
 );
 
-export default class extends React.Component {
+function ErrorMessage({ errors, target, children }) {
+  return errors[target] ? children() : null;
+}
+
+export default class MyForm extends React.Component {
   get initialValues() {
     return {
       name: '',
@@ -99,7 +108,13 @@ export default class extends React.Component {
     return (
       <Form initialValues={this.initialValues} onSubmit={this.handleSubmit}>
         {props => {
-          const { values, handleChange, setDirty, handleSubmit } = props;
+          const {
+            values,
+            handleChange,
+            setDirty,
+            handleSubmit,
+            errors,
+          } = props;
           return (
             <React.Fragment>
               <form onSubmit={handleSubmit}>
@@ -110,6 +125,13 @@ export default class extends React.Component {
                   onChange={handleChange}
                   onBlur={setDirty}
                 />
+                <ErrorMessage errors={errors} target="name">
+                  {() => (
+                    <StyledErrorMessage>
+                      Please provide your name
+                    </StyledErrorMessage>
+                  )}
+                </ErrorMessage>
                 <FormGroup
                   id="surname"
                   label="surname"
@@ -117,6 +139,13 @@ export default class extends React.Component {
                   onChange={handleChange}
                   onBlur={setDirty}
                 />
+                <ErrorMessage errors={errors} target="surname">
+                  {() => (
+                    <StyledErrorMessage>
+                      Please provide your surname
+                    </StyledErrorMessage>
+                  )}
+                </ErrorMessage>
                 <FormGroup
                   id="age"
                   label="age"
@@ -124,6 +153,13 @@ export default class extends React.Component {
                   onChange={handleChange}
                   onBlur={setDirty}
                 />
+                <ErrorMessage errors={errors} target="age">
+                  {() => (
+                    <StyledErrorMessage>
+                      Please provide your age
+                    </StyledErrorMessage>
+                  )}
+                </ErrorMessage>
                 <FormGroup
                   id="terms"
                   label="accept terms and conditions"
@@ -132,6 +168,13 @@ export default class extends React.Component {
                   onChange={handleChange}
                   onBlur={setDirty}
                 />
+                <ErrorMessage errors={errors} target="terms">
+                  {() => (
+                    <StyledErrorMessage>
+                      You must acknowledge that you agree with the terms
+                    </StyledErrorMessage>
+                  )}
+                </ErrorMessage>
                 <Button type="submit">Save</Button>
               </form>
               <pre>{JSON.stringify(props, null, 2)}</pre>
