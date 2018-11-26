@@ -8,6 +8,12 @@ export default class Resizer extends React.Component {
   };
 
   componentDidMount = () => {
+    this.setState(() => ({
+      innerWidth: window.innerWidth,
+      innerHeight: window.innerHeight,
+      scrollY: window.scrollY,
+    }));
+
     this.listener = window.addEventListener('resize', e => {
       const window = e.target;
       this.setState(() => ({
