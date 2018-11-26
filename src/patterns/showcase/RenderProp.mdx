@@ -1,0 +1,22 @@
+---
+name: Render Prop
+menu: Patterns
+---
+
+import Resizer from '../RenderProp.js';
+
+# Window Resizer
+
+## Basic usage
+
+Resize browser to 👀
+
+<Resizer>
+  {({ innerWidth, innerHeight, scrollY }) => (
+    <>
+      <p>Inner Width: {innerWidth}</p>
+      <p>Inner Height: {innerHeight}</p>
+      <p>ScrollY: {scrollY}</p>
+    </>
+  )}
+</Resizer>
