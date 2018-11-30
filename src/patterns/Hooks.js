@@ -1,13 +1,19 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function useResizer() {
+type IUseResizer = {
+  innerWidth: number,
+  innerWidth: number,
+  scrollY: number,
+};
+
+export default function useResizer(): IUseResizer {
   const [innerWidth, setInnerWidth] = useState(() => window.innerWidth);
   const [innerHeight, setInnerHeight] = useState(() => window.innerHeight);
   const [scrollY, setScrollY] = useState(() => window.scrollY);
   let listener;
 
-  useLayoutEffect(() => {
-    window.addEventListener('resize', e => {
+  useEffect(() => {
+    listener = window.addEventListener('resize', e => {
       const window = e.target;
       setInnerWidth(window.innerWidth);
       setInnerHeight(window.innerHeight);
@@ -22,4 +28,15 @@ export default function useResizer() {
     innerWidth,
     scrollY,
   };
+}
+
+export function HookConsumer(props) {
+  const { innerWidth, innerHeight, scrollY } = useResizer();
+  return (
+    <>
+      <p>Inner Width: {innerWidth}</p>
+      <p>Inner Height: {innerHeight}</p>
+      <p>ScrollY: {scrollY}</p>
+    </>
+  );
 }
