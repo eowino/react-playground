@@ -62,9 +62,13 @@ function Usage({
         <p>The button is on</p>
       </Toggle.On>
       <Toggle.Button />
-      <Toggle.Off>
-        <p>The button is off</p>
-      </Toggle.Off>
+      <div className="we-can-nest-elements-unlike-02.js">
+        <div className="and-still-get-the-shared-state">
+          <Toggle.Off>
+            <p>The button is off</p>
+          </Toggle.Off>
+        </div>
+      </div>
     </Toggle>
   );
 }
