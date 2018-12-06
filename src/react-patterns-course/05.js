@@ -1,4 +1,4 @@
-// Compound Components
+// Prevent Unnecessary Rerenders of Compound Components using React Context
 import React from 'react';
 import Switch from './Switch';
 

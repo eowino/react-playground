@@ -6,11 +6,11 @@ import Usage3 from './react-patterns-course/03';
 import Usage4 from './react-patterns-course/04';
 import Usage5 from './react-patterns-course/05';
 import Usage6 from './react-patterns-course/06';
-// import Usage7 from './react-patterns-course/07';
-// import Usage8 from './react-patterns-course/08';
-// import Usage9 from './react-patterns-course/09';
-// import Usage10 from './react-patterns-course/10';
-// import Usage11 from './react-patterns-course/11';
+import Usage7 from './react-patterns-course/07';
+import Usage8 from './react-patterns-course/08';
+import Usage9 from './react-patterns-course/09';
+import Usage10 from './react-patterns-course/10';
+import Usage11 from './react-patterns-course/11';
 // import Usage12 from './react-patterns-course/12';
 // import Usage13 from './react-patterns-course/13';
 // import Usage14 from './react-patterns-course/14';
@@ -51,6 +51,21 @@ function App() {
       </Div>
       <Div title="Render Props">
         <Usage6 />
+      </Div>
+      <Div title="Prop collections with Render Props">
+        <Usage7 />
+      </Div>
+      <Div title="Use Prop Getters with Render Props">
+        <Usage8 />
+      </Div>
+      <Div title="Use Component State Initializers">
+        <Usage9 />
+      </Div>
+      <Div title="Implement Component State Reducers">
+        <Usage10 />
+      </Div>
+      <Div title="Improve the usability of Component State Reducers with state change types">
+        <Usage11 />
       </Div>
     </div>
   );

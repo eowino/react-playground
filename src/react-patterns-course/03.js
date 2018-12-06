@@ -1,4 +1,4 @@
-// Compound Components
+// Using Context
 import React from 'react';
 import Switch from './Switch';
 

@@ -1,4 +1,4 @@
-// Compound Components
+// Render Props
 import React from 'react';
 import Switch from './Switch';
 
@@ -23,13 +23,13 @@ class Toggle extends React.Component {
   }
 }
 
-function CommonToggle(props) {
-  return (
-    <Toggle {...props}>
-      {({ on, toggle }) => <Switch on={on} onClick={toggle} />}
-    </Toggle>
-  );
-}
+// function CommonToggle(props) {
+//   return (
+//     <Toggle {...props}>
+//       {({ on, toggle }) => <Switch on={on} onClick={toggle} />}
+//     </Toggle>
+//   );
+// }
 
 function Usage({
   onToggle = (...args) => console.log(lesson + ' onToggle', ...args),

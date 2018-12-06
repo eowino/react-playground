@@ -1,4 +1,4 @@
-// Compound Components
+// Build a Toggle Component
 import React from 'react';
 import Switch from './Switch';
 

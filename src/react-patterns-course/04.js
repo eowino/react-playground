@@ -1,4 +1,4 @@
-// Compound Components
+// Validate Compound Components with Context Consumers
 import React from 'react';
 import Switch from './Switch';
 
