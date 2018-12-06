@@ -3,6 +3,21 @@ import React from 'react';
 import Usage1 from './react-patterns-course/01';
 import Usage2 from './react-patterns-course/02';
 import Usage3 from './react-patterns-course/03';
+import Usage4 from './react-patterns-course/04';
+import Usage5 from './react-patterns-course/05';
+import Usage6 from './react-patterns-course/06';
+// import Usage7 from './react-patterns-course/07';
+// import Usage8 from './react-patterns-course/08';
+// import Usage9 from './react-patterns-course/09';
+// import Usage10 from './react-patterns-course/10';
+// import Usage11 from './react-patterns-course/11';
+// import Usage12 from './react-patterns-course/12';
+// import Usage13 from './react-patterns-course/13';
+// import Usage14 from './react-patterns-course/14';
+// import Usage15 from './react-patterns-course/15';
+// import Usage16 from './react-patterns-course/16';
+// import Usage17 from './react-patterns-course/17';
+// import Usage18 from './react-patterns-course/18';
 
 function Div(props) {
   return (
@@ -27,6 +42,15 @@ function App() {
       </Div>
       <Div title="Using Context">
         <Usage3 />
+      </Div>
+      <Div title="Validate Compound Components with Context Consumers">
+        <Usage4 />
+      </Div>
+      <Div title="Prevent Unnecessary Rerenders of Compound Components using React Context">
+        <Usage5 />
+      </Div>
+      <Div title="Render Props">
+        <Usage6 />
       </Div>
     </div>
   );
