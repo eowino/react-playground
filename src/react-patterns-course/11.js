@@ -2,7 +2,7 @@
 import React from 'react';
 import Switch from './Switch';
 
-const lesson = '10';
+const lesson = '11';
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args));
 
@@ -73,8 +73,8 @@ class Toggle extends React.Component {
 
 class Usage extends React.Component {
   static defaultProps = {
-    onToggle: (...args) => console.log('onToggle', ...args),
-    onReset: (...args) => console.log('onReset', ...args),
+    onToggle: (...args) => console.log(lesson + ' onToggle', ...args),
+    onReset: (...args) => console.log(lesson + ' onReset', ...args),
   };
 
   initialState = { timesClicked: 0 };

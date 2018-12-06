@@ -11,7 +11,7 @@ import Usage8 from './react-patterns-course/08';
 import Usage9 from './react-patterns-course/09';
 import Usage10 from './react-patterns-course/10';
 import Usage11 from './react-patterns-course/11';
-// import Usage12 from './react-patterns-course/12';
+import Usage12 from './react-patterns-course/12';
 // import Usage13 from './react-patterns-course/13';
 // import Usage14 from './react-patterns-course/14';
 // import Usage15 from './react-patterns-course/15';
@@ -66,6 +66,9 @@ function App() {
       </Div>
       <Div title="Improve the usability of Component State Reducers with state change types">
         <Usage11 />
+      </Div>
+      <Div title="Improve the usability of Component State Reducers with state change types">
+        <Usage12 />
       </Div>
     </div>
   );
