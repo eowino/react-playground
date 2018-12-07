@@ -12,8 +12,8 @@ import Usage9 from './react-patterns-course/09';
 import Usage10 from './react-patterns-course/10';
 import Usage11 from './react-patterns-course/11';
 import Usage12 from './react-patterns-course/12';
-// import Usage13 from './react-patterns-course/13';
-// import Usage14 from './react-patterns-course/14';
+import Usage13 from './react-patterns-course/13';
+import Usage14 from './react-patterns-course/14';
 // import Usage15 from './react-patterns-course/15';
 // import Usage16 from './react-patterns-course/16';
 // import Usage17 from './react-patterns-course/17';
@@ -69,6 +69,12 @@ function App() {
       </Div>
       <Div title="Improve the usability of Component State Reducers with state change types">
         <Usage12 />
+      </Div>
+      <Div title="Support Control Props for all state">
+        <Usage13 />
+      </Div>
+      <Div title="Support a state change handler for all control props">
+        <Usage14 />
       </Div>
     </div>
   );
